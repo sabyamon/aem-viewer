@@ -5,20 +5,21 @@ AEM Viewer is an extension which helps developers and testers to quickly check i
 
 Use cases for AEM Viewer .
 
-The result has been split into two views , first tab shows the RAW data and the second tab shows the Skimmed Data . 
+The result has been split into three views , first tab shows the RAW data , second tab shows the Skimmed Data and the third tab shows the Quick Links that developers use to in their day to day life. 
 
 **** Intention is to show data in a non geeky way in the "Skimmed Data" tab and dumping the raw data in the "RAW Data" tab.
 
-For Developers :
+#### For Developers :
 
 1. Quickly Debug a AEM/CQ Page . (To debug in Author Environment, please remove the content finder 'cf#' from the url ) .
 2. To know what are the components a CQ page is made of .
 3. Check who has created , modified and activated the page without going to CRXDE .
 4. Checking Page Properties in Publisher .
+5. Quick Links saves navigation time and helps devs to not remember some AEM urls used extensively for development.
+6. Quick Links help devs quickly navigate to the urls that Developers need to use almost everyday .
 
 
-
-For Testers :
+#### For Testers :
 
 1. Content Validation for a particular component.
 2. Testing a component.
