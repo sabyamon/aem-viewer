@@ -1,4 +1,4 @@
-aem-viewer
+AEM Viewer
 ==========
 
 AEM Viewer is an extension which helps developers and testers to quickly check information about a page which is hosted in Adobe AEM/Day CQ . 
