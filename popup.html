@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
-    <head>
-    <title>AEM Viewer</title>
+<head>
+    <title>Local AEM</title>
     <script src="jquery.js" type="text/javascript"></script>
     <script src="jquery-ui.custom.js" type="text/javascript"></script>
     <script src="common.js" type="text/javascript"></script>
@@ -10,25 +10,41 @@
     <script src="tabcontent.js" type="text/javascript"></script>
     <link href="tabcontent.css" rel="stylesheet" type="text/css" />
     <script src="popup.js"></script>
-    </head>
-    <body>
-    	<div style="width: 500px; margin: 0 auto;">
-            <ul class="tabs" data-persist="true">
-                <li><a href="#view1">Raw Data</a></li>
-                <li><a href="#view2">Skimmed Data</a></li>
-            </ul>
+</head>
+<body>
+<div style="width: 500px; margin: 0 auto;">
+    <ul class="tabs" data-persist="true">
+        <li><a href="#view1">Raw Data</a></li>
+        <li><a href="#view2">Skimmed Data</a></li>
+        <li><a href="#view3">Quick Links</a></li>
+    </ul>
+    <div class="tabcontents">
+        <div id="view1">
+            <div id="tree"></div>
             <div id="error_fadfish" style="color:red">
 
             </div>
-            <div class="tabcontents">
-                <div id="view1">
-                    <div id="tree"></div>
-                </div>
-                <div id="view2">
-                    <div id="treeskimmed"></div>               
-                </div>
-                
+        </div>
+        <div id="view2">
+            <div id="treeskimmed"></div>
+            <div id="error_fadfish" style="color:red">
+
             </div>
         </div>
-    </body>
+        <div id="view3">
+            <div><a id="aemwelcome" href="#" target="_blank">AEM Welcome</a></div>
+            <div ><a id="siteAdmin" href="#" target="_blank">Site Admin</a></div>
+            <div ><a id="crxde" href="#" target="_blank">CRXDE</a></div>
+            <div ><a id="sysconsole" href="#" target="_blank">System Console</a></div>
+            <div ><a id="crxexplorer" href="#" target="_blank">CRX Explorer</a></div>
+            <div ><a id="configMgr" href="#" target="_blank">Config Manager</a></div>
+            <div ><a id="resourceResolverConfig" href="#" target="_blank">Resource Resolver Config</a></div>
+            <div ><a id="resourceResolverTest" href="#" target="_blank">Resource Resolver Test</a></div>
+            <div ><a id="packagemanager" href="#" target="_blank">Package Manager</a></div>
+            <div ><a id="workflowconsole" href="#" target="_blank">Workflow Console</a></div>
+            <div ><a id="slinglogs" href="#" target="_blank">AEM Log</a></div>
+        </div>
+    </div>
+</div>
+</body>
 </html>
