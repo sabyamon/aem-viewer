@@ -4,6 +4,11 @@ var activatedNodes = new Array();
 chrome.tabs.getSelected(null, function(tab) {
 
 
+    var imagePath = chrome.extension.getURL('icon.png');
+    console.log('image path is :' + imagePath);
+
+    $('#fadfishImage').attr('src',imagePath);
+
     console.log('Extension clicked');
     // Sabya : Get the selected Tab .
     var rePattern = new RegExp('^(http[s]?[:]//[^/]+[^\.]+)\.(.+)');
@@ -310,7 +315,16 @@ var createSkimmedDynatree = function(object, allData) {
             continue;
         }else if(title === 'jcr:title'){
             title = 'Title in Siteadmin' ;
-        }else{
+        }else if(title == 'brand'){
+            title = 'Brand';
+        }else if(title == 'region'){
+            title = 'Region';
+        }else if(title == 'role'){
+            title = 'Role' ;
+        }else if(title == 'status'){
+            title = 'Status' ;
+        }
+        else{
             console.log('inside else block');
             continue ;
         }

@@ -1,0 +1,21 @@
+/*
+This style sheet will contain specific styles for AEM Viewer
+*/
+
+.header{
+    height: 36px;
+
+}
+
+.iconholder{
+    width: 15%;
+    float: left;
+}
+
+span.ext-title{
+    font-size: 20px;
+}
+
+span.ext-subtitle{
+    font-size: 12px;
+}
