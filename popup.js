@@ -3,6 +3,15 @@ var activatedNodes = new Array();
 
 chrome.tabs.getSelected(null, function(tab) {
 
+    // Global Variables . will be set when the extension loads.
+    // Will be used accross functionalities.
+
+    var host = "" ;
+    var port = "" ;
+    var scheme = "" ;
+    var actualAEMPageURL = "" ;
+    var actualPageURLWithoutQueryParam = "" ;
+    var firstPart = "" ;
 
     var imagePath = chrome.extension.getURL('icon.png');
     console.log('image path is :' + imagePath);
@@ -16,6 +25,8 @@ chrome.tabs.getSelected(null, function(tab) {
         $(this).tab('show')
     });
 
+
+    // Handle quick link clicks.
     $('.quick_button').click(function(){
        url = $(this).data('url');
        console.log('quick links clicked .. ' + url);
@@ -23,43 +34,69 @@ chrome.tabs.getSelected(null, function(tab) {
        window.open(url, '_blank');
     });
 
+    // Handle WCM Mode Switcher.
+
+    $('.wcm_mode_switcher').click(function () {
+        // actualPageURLWithoutQueryParam will not have any query string present.
+        // Relax and append wcmmode to it.
+
+        currentPageURL = actualPageURLWithoutQueryParam + '.html' ;
+        console.log('current page url is : ' + currentPageURL);
+
+        if((desiredMode === 'edit' || desiredMode === 'design') &&  currentPageURL.indexOf('/cf#') === -1){
+            currentPageURL = currentPageURL.replace(firstPart,firstPart + '/cf#');
+        }
+        var desiredMode = $(this).attr('id');
+        console.log('desired mode is ' + desiredMode);
+
+        currentPageURL = currentPageURL.concat('?wcmmode='+desiredMode);
+
+        console.log('calculated current page url is : ' + currentPageURL);
+
+        window.open(currentPageURL); // http://localhost:4502/content/leggmason/en_us/insights/market-outlook/chinese-growth?wcmmode=design
+        //window.open(currentPageURL, '_top');
+    });
+
+
     // Sabya : Get the selected Tab .
     var rePattern = new RegExp('^(http[s]?[:]//[^/]+[^\.]+)\.(.+)');
     var webgrp = rePattern.exec(tab.url); // Get the URL of the TAB , extension was opened for .
     console.log('url value is : ' + webgrp);
     // url value is : http://localhost:4502/content/fadfish/home.html,http://localhost:4502/content/fadfish/home,html
 
+    actualAEMPageURL = webgrp ; // Setting value of global var. Will be used by other functionalities.
+
     if (webgrp.length > 0) {
         //var pageURL = webgrp[1] + '.infinity.json'; // Get the inifinity json of that page if its exposed .
-        var pageURL = webgrp[1] + '.tidy.-1.json'; // Changing it to tidy.json as some pages are creating issues with inifinity.
-        // Specifically for AEM 5.6
-        console.log(pageURL);
+        var pageURL = webgrp[1] + '.tidy.-1.json'; // Changing it to tidy.json.
 
-        // Need to extract the Host and Port .
+        console.log('page url : ' + pageURL);
 
-        var host = "" ;
-        var port = "" ;
-        var protocol = "" ;
+        actualPageURLWithoutQueryParam = webgrp[1] ;
+        // Extract Host and Port .
+
+
         var tempURL = pageURL ;
         var disectedURL = tempURL.split('/');
 
-        protocol = disectedURL[0];
+        scheme = disectedURL[0];
         host  = disectedURL[2];
+
+        //var relativePagePath = disectedURL[3] ;
+        //console.log('relative page path is : ' + relativePagePath);
 
         //console.log('protocol ' + protocol.join('/'));
 
-        var firstPart = "" ;
 
-        firstPart = protocol + "//" + host ;
 
-        console.log('first part is : ' + firstPart);
+        firstPart = scheme + "//" + host ;
+
+        console.log('first part of the url is : ' + firstPart);
 
         if(pageURL.indexOf('cf#') > 0){
             console.log('User has opened the page with content finder');
             pageURL = pageURL.replace("/cf#","");
             console.log('page url after chopping off the cf# from url : ' + pageURL);
-
-
         }else{
             console.log('User has opened the page in publish mode');
         }
