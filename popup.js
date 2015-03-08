@@ -10,6 +10,19 @@ chrome.tabs.getSelected(null, function(tab) {
     $('#fadfishImage').attr('src',imagePath);
 
     console.log('Extension clicked');
+
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    });
+
+    $('.quick_button').click(function(){
+       url = $(this).data('url');
+       console.log('quick links clicked .. ' + url);
+
+       window.open(url, '_blank');
+    });
+
     // Sabya : Get the selected Tab .
     var rePattern = new RegExp('^(http[s]?[:]//[^/]+[^\.]+)\.(.+)');
     var webgrp = rePattern.exec(tab.url); // Get the URL of the TAB , extension was opened for .
@@ -103,17 +116,17 @@ function createQuickLinks(tab,dynamicPart){
     var workflowconsole = dynamicPart + '/libs/cq/workflow/content/console.html';
     var slinglogs = dynamicPart + '/system/console/status-slinglogs';
 
-    $('#aemwelcome').attr('href',welcomePageURL) ;
-    $('#siteAdmin').attr('href',siteAdmin) ;
-    $('#crxde').attr('href',crxde) ;
-    $('#sysconsole').attr('href',sysconsole) ;
-    $('#crxexplorer').attr('href',crxexplorer) ;
-    $('#configMgr').attr('href',configMgr) ;
-    $('#resourceResolverConfig').attr('href',resourceResolverConfig) ;
-    $('#resourceResolverTest').attr('href',resourceResolverTest) ;
-    $('#packagemanager').attr('href',packagemanager) ;
-    $('#workflowconsole').attr('href',workflowconsole) ;
-    $('#slinglogs').attr('href',slinglogs) ;
+    $('#aemwelcome').attr('data-url',welcomePageURL) ;
+    $('#siteAdmin').attr('data-url',siteAdmin) ;
+    $('#crxde').attr('data-url',crxde) ;
+    $('#sysconsole').attr('data-url',sysconsole) ;
+    $('#crxexplorer').attr('data-url',crxexplorer) ;
+    $('#configMgr').attr('data-url',configMgr) ;
+    $('#resourceResolverConfig').attr('data-url',resourceResolverConfig) ;
+    $('#resourceResolverTest').attr('data-url',resourceResolverTest) ;
+    $('#packagemanager').attr('data-url',packagemanager) ;
+    $('#workflowconsole').attr('data-url',workflowconsole) ;
+    $('#slinglogs').attr('data-url',slinglogs) ;
 
 }
 
@@ -345,7 +358,7 @@ var createSkimmedDynatree = function(object, allData) {
         } else {
             object[counter] = {
                 title : title,
-                isFolder : true,
+                isFolder : true
             };
             object[counter].children = [];
             createSkimmedDynatree(object[counter].children, allData[k]);
@@ -377,7 +390,11 @@ function isComp(node) {
 var getPath = function(node) {
     return createURL(node, '');
 };
- 
+
+$('#myTab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+})
  
  
  

@@ -19,3 +19,44 @@ span.ext-title{
 span.ext-subtitle{
     font-size: 12px;
 }
+
+
+
+/* New style for aem viewer */
+
+.navbar-brand {
+    height : 35px;
+    padding-top: 5px;
+    padding-left: 8px;
+}
+.extn-body{
+    width: 500px;
+    margin-top: 40px;
+}
+
+.navigation-holder {
+    width: 320px;
+    float: left;
+    height: 40px;
+    display: inline-block;
+    padding-left : 4px;
+    padding-top: 4px;
+}
+
+.brand-text{
+    float: left;
+    width: 97px;
+    text-align: center;
+    margin-top: 4px;
+    height: 40px;
+}
+
+.tab-pane{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.quick_button{
+    width: 100%;
+    margin-top: 10px;
+}
