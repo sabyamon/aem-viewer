@@ -51,9 +51,10 @@
         <div class="tabcontents tab-content" id="myTabContent">
 
             <div id="quick-links" role="tabpanel" class="tab-pane fade active in" aria-labelledby="quickLinks">
-                <button type="button" class="btn btn-success wcm_mode_switcher" id="edit">Edit Mode</button>
-                <button type="button" class="btn btn-success wcm_mode_switcher" id="disabled">Disabled Mode</button>
-                <button type="button" class="btn btn-success wcm_mode_switcher" id="design">Design Mode</button>
+                <button type="button" class="btn  btn-success wcm_mode_switcher" id="edit">Edit Mode</button>
+                <button type="button" class="btn btn-success-yellow wcm_mode_switcher" id="disabled">Disabled Mode</button>
+                <button type="button" class="btn btn-success-blue wcm_mode_switcher" id="design">Design Mode</button>
+                <button type="button" class="btn btn-warning" id="open-in-crxde">Open in CRXDE</button>
                 <!--<div><a id="aemwelcome" href="#" target="_blank">AEM Welcome</a></div>-->
                 <button type="button" class="btn btn-success quick_button" id="aemwelcome">AEM Welcome</button>
                 <button type="button" class="btn btn-primary quick_button" id="siteAdmin">Site Admin</button>
@@ -68,7 +69,7 @@
                 <button type="button" class="btn btn-danger quick_button" id="slinglogs">AEM Log</button>
                 <!--<div ><a id="siteAdmin" href="#" target="_blank">Site Admin</a></div>-->
                 <!--<div ><a id="crxde" href="#" target="_blank">CRXDE</a></div>-->
-                <!--<div ><a id="sysconsole" href="#" target="_blank">System Console</a></div>-->
+                <!--<div ><a id="syscosole" href="#" target="_blank">System Console</a></div>-->
                 <!--<div ><a id="crxexplorer" href="#" target="_blank">CRX Explorer</a></div>-->
                 <!--<div ><a id="configMgr" href="#" target="_blank">Config Manager</a></div>
                 <div ><a id="resourceResolverConfig" href="#" target="_blank">Resource Resolver Config</a></div>
@@ -79,11 +80,17 @@
             </div>
             <div id="node-view" role="tabpanel" class="tab-pane fade" aria-labelledby="nodeView">
                 <div id="tree"></div>
-                <div id="error_fadfish" style="color:red">
+                <div class="alert alert-danger error_fadfish" role="alert">
+                    <strong>Oh snap!</strong> We don't have any information for this page !
                 </div>
+                <!--<div id="error_fadfish" style="color:red">
+                </div>-->
             </div>
             <div id="skimmed" role="tabpanel" class="tab-pane fade" aria-labelledby="skimmedView">
                 <div id="treeskimmed"></div>
+                <div class="alert alert-danger error_fadfish" role="alert">
+                    <strong>Oh snap!</strong> We don't have any information for this page !
+                </div>
             </div>
         </div>
 

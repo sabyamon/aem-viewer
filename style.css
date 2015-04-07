@@ -60,3 +60,16 @@ span.ext-subtitle{
     width: 100%;
     margin-top: 10px;
 }
+
+.error_fadfish{
+    display:none;
+}
+
+.btn-success-yellow{
+    background-color: #faebcc;
+}
+
+.btn-success-blue{
+    background-color: #bce8f1 ;
+}
+
