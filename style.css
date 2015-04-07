@@ -37,7 +37,7 @@ span.ext-subtitle{
 .navigation-holder {
     width: 320px;
     float: left;
-    height: 40px;
+    height: 64px;
     display: inline-block;
     padding-left : 4px;
     padding-top: 4px;
@@ -71,5 +71,12 @@ span.ext-subtitle{
 
 .btn-success-blue{
     background-color: #bce8f1 ;
+}
+
+.nav-tabs>li {
+    width: 78px;
+}
+.scrollable-logs{
+    display: none;
 }
 

@@ -2,6 +2,7 @@ var currentUrl;
 var activatedNodes = new Array();
 var contentPageURL;
 var relativePagePath;
+var scrollableInterval;
 
 chrome.tabs.getSelected(null, function (tab) {
 
@@ -27,6 +28,18 @@ chrome.tabs.getSelected(null, function (tab) {
         $(this).tab('show')
     });
 
+
+    /**
+     * Clicking on any other tab will clear the periodic update to the server log.
+     */
+    $('#quickLinks, #nodeView, #skimmedView').click(function(){
+        $('.scrollable-logs').hide();
+        window.clearInterval(scrollableInterval);
+    });
+
+    /**
+       Fetch Server Logs only when this tab is clicked . Reducing the extension load time.
+     */
 
     // Handle quick link clicks.
     $('.quick_button').click(function () {
@@ -139,6 +152,47 @@ chrome.tabs.getSelected(null, function (tab) {
                 console.log('Its screwed ! Something wrong happened!!');
                 $('.error_fadfish').text('Sorry ! No Data is available for this page');
             }
+        });
+
+
+        // Fetch Log
+
+
+        $('.server-log-tab').click(function() {
+
+            $('.bar').animate({ width: "100%" },3000);
+            scrollableInterval = setInterval(function() {
+                // Do something after 5 seconds
+                console.log('fetching log');
+                $.ajax({
+                    url: 'http://localhost:4502/bin/crxde/logs?tail=200',
+                    async: true,
+                    type: 'GET',
+                    timeout: 5500,
+                    statusCode: {
+                        200: function (data, status, request) {
+
+                            console.log('status is : ' + status);
+                            console.log('data from AEM is : ' + data);
+                            $('.scrollable-logs').html(data);
+                            $('.scrollable-logs').show();
+                            $('html, body').scrollTop( $(document).height() );
+                            //$('.scrollable-logs').scrollTop($('.scrollable-logs')[0].scrollHeight);
+
+                            /*var d = $('.scrollable-logs');
+                            d.scrollTop(d.prop("scrollHeight"));*/
+                        }
+                    },
+                    success: function (data, status, request) {
+                        console.log('Inside success !!');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log('Its screwed ! Something wrong happened!!');
+                        $('.error_fadfish').text('Sorry ! No Data is available for this page');
+                    }
+                });
+
+            }, 5000);
         });
     }
 

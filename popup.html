@@ -30,26 +30,25 @@
                     <li role="presentation" class="active">
                         <a href="#quick-links" id="quickLinks" data-toggle="tab" aria-controls="quick-links" aria-expanded="true">Quick Links</a>
                     </li>
-                    <li role="presentation" ><a href="#node-view" id="nodeView" data-toggle="tab" aria-controls="node-view" aria-expanded="true">Node View</a></li>
-                    <li role="presentation"><a href="#skimmed" id="skimmedView" data-toggle="tab" aria-controls="skimmed" aria-expanded="true">Skimmed</a></li>
+                    <li role="presentation">
+                        <a href="#node-view" id="nodeView" data-toggle="tab" aria-controls="node-view" aria-expanded="true">Node View</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#skimmed" id="skimmedView" data-toggle="tab" aria-controls="skimmed" aria-expanded="true">Filtered View</a>
+                    </li>
+                    <li role="presentation" class="server-log-tab">
+                        <a href="#rawlogs" id="logView" data-toggle="tab" aria-controls="logs" aria-expanded="true">Server Log</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </nav>
 
-<!--<div class="header">
-    <div class="iconholder">
-        <img src="" id="fadfishImage" width="50" height="50">
-    </div>
-    <div class="headertext">
-        <span class="ext-title">AEM Viewer Local</span>
-    </div>
-</div>-->
+
     <div class="container extn-body">
 
         <div class="tabcontents tab-content" id="myTabContent">
-
             <div id="quick-links" role="tabpanel" class="tab-pane fade active in" aria-labelledby="quickLinks">
                 <button type="button" class="btn  btn-success wcm_mode_switcher" id="edit">Edit Mode</button>
                 <button type="button" class="btn btn-success-yellow wcm_mode_switcher" id="disabled">Disabled Mode</button>
@@ -67,24 +66,12 @@
                 <button type="button" class="btn btn-success quick_button" id="packagemanager">Package Manager</button>
                 <button type="button" class="btn btn-primary quick_button" id="workflowconsole">Workflow Console</button>
                 <button type="button" class="btn btn-danger quick_button" id="slinglogs">AEM Log</button>
-                <!--<div ><a id="siteAdmin" href="#" target="_blank">Site Admin</a></div>-->
-                <!--<div ><a id="crxde" href="#" target="_blank">CRXDE</a></div>-->
-                <!--<div ><a id="syscosole" href="#" target="_blank">System Console</a></div>-->
-                <!--<div ><a id="crxexplorer" href="#" target="_blank">CRX Explorer</a></div>-->
-                <!--<div ><a id="configMgr" href="#" target="_blank">Config Manager</a></div>
-                <div ><a id="resourceResolverConfig" href="#" target="_blank">Resource Resolver Config</a></div>
-                <div ><a id="resourceResolverTest" href="#" target="_blank">Resource Resolver Test</a></div>-->
-                <!--<div ><a id="packagemanager" href="#" target="_blank">Package Manager</a></div>
-                <div ><a id="workflowconsole" href="#" target="_blank">Workflow Console</a></div>
-                <div ><a id="slinglogs" href="#" target="_blank">AEM Log</a></div>-->
             </div>
             <div id="node-view" role="tabpanel" class="tab-pane fade" aria-labelledby="nodeView">
                 <div id="tree"></div>
                 <div class="alert alert-danger error_fadfish" role="alert">
                     <strong>Oh snap!</strong> We don't have any information for this page !
                 </div>
-                <!--<div id="error_fadfish" style="color:red">
-                </div>-->
             </div>
             <div id="skimmed" role="tabpanel" class="tab-pane fade" aria-labelledby="skimmedView">
                 <div id="treeskimmed"></div>
@@ -92,40 +79,19 @@
                     <strong>Oh snap!</strong> We don't have any information for this page !
                 </div>
             </div>
-        </div>
-
-        <!--<div style="width: 500px; margin: 0 auto;">
-            <ul class="tabs" data-persist="true">
-                <li><a href="#view1">Raw Data</a></li>
-                <li><a href="#view2">Skimmed Data</a></li>
-                <li><a href="#view3">Quick Links</a></li>
-            </ul>
-            <div class="tabcontents">
-                <div id="view1">
-                    <div id="tree"></div>
-                    <div id="error_fadfish" style="color:red">
-                    </div>
+            <div id="rawlogs">
+                <!--<div class="progress">
+                    <div class="bar" style="width: 0%;"></div>
                 </div>
-                <div id="view2">
-                    <div id="treeskimmed"></div>
-                    &lt;!&ndash;<div id="error_fadfish" style="color:red">
-                    </div>&ndash;&gt;
+                <div class="input-group" style="position: fixed">
+                    <span class="input-group-addon" id="basic-addon1">Enter Text</span>
+                    <input type="text" class="form-control" placeholder="Enter Text" aria-describedby="basic-addon1">
                 </div>
-                <div id="view3">
-                    <div><a id="aemwelcome" href="#" target="_blank">AEM Welcome</a></div>
-                    <div ><a id="siteAdmin" href="#" target="_blank">Site Admin</a></div>
-                    <div ><a id="crxde" href="#" target="_blank">CRXDE</a></div>
-                    <div ><a id="sysconsole" href="#" target="_blank">System Console</a></div>
-                    <div ><a id="crxexplorer" href="#" target="_blank">CRX Explorer</a></div>
-                    <div ><a id="configMgr" href="#" target="_blank">Config Manager</a></div>
-                    <div ><a id="resourceResolverConfig" href="#" target="_blank">Resource Resolver Config</a></div>
-                    <div ><a id="resourceResolverTest" href="#" target="_blank">Resource Resolver Test</a></div>
-                    <div ><a id="packagemanager" href="#" target="_blank">Package Manager</a></div>
-                    <div ><a id="workflowconsole" href="#" target="_blank">Workflow Console</a></div>
-                    <div ><a id="slinglogs" href="#" target="_blank">AEM Log</a></div>
-                </div>
+                <button type="button" class="btn btn-success quick_button" id="findLogText">Find</button>
+                <button type="button" class="btn btn-danger quick_button" id="lockScroll">Lock Scroll</button>-->
+                <div class="scrollable-logs"></div>
             </div>
-        </div>-->
+        </div>
     </div>
 </body>
 </html>
