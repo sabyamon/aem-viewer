@@ -225,13 +225,13 @@ function createQuickLinks(tab, dynamicPart, relativePagePath) {
     console.log('creating quick links for AEM Viewer');
     var welcomePageURL = dynamicPart + '/welcome';
     var siteAdmin = dynamicPart + '/siteadmin';
-    var crxde = dynamicPart + '/crx/de';
+    var crxde = dynamicPart + '/crx/de/index.jsp';
     var sysconsole = dynamicPart + '/system/console';
     var crxexplorer = dynamicPart + '/crx/explorer';
     var configMgr = dynamicPart + '/system/console/configMgr';
     var resourceResolverConfig = dynamicPart + '/system/console/configMgr/org.apache.sling.jcr.resource.internal.JcrResourceResolverFactoryImpl';
     var resourceResolverTest = dynamicPart + '/system/console/jcrresolver';
-    var packagemanager = dynamicPart + '/crx/packmgr';
+    var packagemanager = dynamicPart + '/crx/packmgr/index.jsp';
     var workflowconsole = dynamicPart + '/libs/cq/workflow/content/console.html';
     var slinglogs = dynamicPart + '/system/console/status-slinglogs';
     var openInCRXDEURL = dynamicPart + '/crx/de/index.jsp#' + relativePagePath;
