@@ -1,8 +1,8 @@
 var currentUrl;
 var activatedNodes = new Array();
-var contentPageURL;
 var relativePagePath;
 var scrollableInterval;
+var actualDomain ; // Will be used to hold the domain name and port.
 
 chrome.tabs.getSelected(null, function (tab) {
 
@@ -15,6 +15,7 @@ chrome.tabs.getSelected(null, function (tab) {
     var actualAEMPageURL = "";
     var actualPageURLWithoutQueryParam = "";
     var firstPart = "";
+    var schemeAndDomain = "" ;
 
     var imagePath = chrome.extension.getURL('icon.png');
     console.log('image path is :' + imagePath);
@@ -24,10 +25,9 @@ chrome.tabs.getSelected(null, function (tab) {
     console.log('Extension clicked');
 
     $('#myTab a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show')
+        e.preventDefault();
+        $(this).tab('show');
     });
-
 
     /**
      * Clicking on any other tab will clear the periodic update to the server log.
@@ -49,10 +49,18 @@ chrome.tabs.getSelected(null, function (tab) {
         window.open(url, '_blank');
     });
 
+    // Opening in CRXDE .
     $('#open-in-crxde').click(function () {
         url = $(this).data('url');
         console.log('quick links clicked .. ' + url);
+        window.open(url, '_blank');
+    })
 
+
+    // Handle Rebuild Client Libs
+    $('#rebuild-client-libs').click(function () {
+        url = $(this).data('url');
+        console.log('rebuilding client libraries.. ' + url);
         window.open(url, '_blank');
     })
 
@@ -72,7 +80,16 @@ chrome.tabs.getSelected(null, function (tab) {
             currentPageURL = currentPageURL.replace('/cf#', "");
         }
 
-        currentPageURL = currentPageURL.concat('?wcmmode=' + desiredMode);
+
+        if(desiredMode === 'debugClientLibs'){
+            if(currentPageURL.indexOf('debugClientLibs=true')){
+                currentPageURL = currentPageURL.replace('?debugClientLibs=true', "");
+            }else{
+                currentPageURL = currentPageURL.concat('?debugClientLibs=true');
+            }
+        }else{
+            currentPageURL = currentPageURL.concat('?wcmmode=' + desiredMode);
+        }
 
         console.log('calculated current page url is : ' + currentPageURL);
 
@@ -108,6 +125,7 @@ chrome.tabs.getSelected(null, function (tab) {
         host = disectedURL[2];
 
         firstPart = scheme + "//" + host;
+        schemeAndDomain = scheme + "//" + host;
 
         console.log('first part of the url is : ' + firstPart);
 
@@ -159,13 +177,14 @@ chrome.tabs.getSelected(null, function (tab) {
 
 
         $('.server-log-tab').click(function() {
-
             $('.bar').animate({ width: "100%" },3000);
             scrollableInterval = setInterval(function() {
                 // Do something after 5 seconds
-                console.log('fetching log');
+                urlForServerLogs = schemeAndDomain + '/bin/crxde/logs?tail=200';
+                console.log('fetching log or host :: ' + urlForServerLogs );
+
                 $.ajax({
-                    url: 'http://localhost:4502/bin/crxde/logs?tail=200',
+                    url: urlForServerLogs,
                     async: true,
                     type: 'GET',
                     timeout: 5500,
@@ -216,6 +235,8 @@ function createQuickLinks(tab, dynamicPart, relativePagePath) {
     var workflowconsole = dynamicPart + '/libs/cq/workflow/content/console.html';
     var slinglogs = dynamicPart + '/system/console/status-slinglogs';
     var openInCRXDEURL = dynamicPart + '/crx/de/index.jsp#' + relativePagePath;
+    var rebuildClientLibsPath = dynamicPart + '/libs/granite/ui/content/dumplibs.rebuild.html?invalidate=true';
+
     console.log('Open In CRX De URL :: ' + openInCRXDEURL);
 
     $('#aemwelcome').attr('data-url', welcomePageURL);
@@ -230,6 +251,7 @@ function createQuickLinks(tab, dynamicPart, relativePagePath) {
     $('#workflowconsole').attr('data-url', workflowconsole);
     $('#slinglogs').attr('data-url', slinglogs);
     $('#open-in-crxde').attr('data-url', openInCRXDEURL);
+    $('#rebuild-client-libs').attr('data-url', rebuildClientLibsPath);
 
 }
 

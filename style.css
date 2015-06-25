@@ -80,3 +80,10 @@ span.ext-subtitle{
     display: none;
 }
 
+#open-in-crxde{
+    margin-top: 5px;
+}
+
+#rebuild-client-libs{
+    margin-top: 5px;
+}
